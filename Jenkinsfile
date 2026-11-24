@@ -1,9 +1,11 @@
+
 pipeline {
     agent any
 
     environment {
         REGISTRY = "localhost:5000"
         IMAGE_NAME = "anil-demo-app"
+        PYTHON = "C:\\Windows\\py.exe"
     }
 
     stages {
@@ -15,7 +17,8 @@ pipeline {
 
         stage('2. Application Build & Test') {
             steps {
-                bat 'py -m py_compile app.py'
+                bat '"%PYTHON%" --version'
+                bat '"%PYTHON%" -m py_compile app.py'
             }
         }
 
@@ -35,7 +38,11 @@ pipeline {
 
     post {
         success {
-            echo "Pipeline succeeded! Image ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} is available locally and in the registry."
+            echo "Pipeline succeeded! Image ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} pushed to registry."
+        }
+
+        failure {
+            echo "Pipeline failed. Check the console output for errors."
         }
     }
 }
