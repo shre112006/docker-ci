@@ -5,7 +5,6 @@ pipeline {
     environment {
         REGISTRY = "localhost:5000"
         IMAGE_NAME = "anil-demo-app"
-        PYTHON = "C:\\Windows\\py.exe"
     }
 
     stages {
@@ -17,8 +16,8 @@ pipeline {
 
         stage('2. Application Build & Test') {
             steps {
-                bat '"%PYTHON%" --version'
-                bat '"%PYTHON%" -m py_compile app.py'
+                bat 'python --version'
+                bat 'python -m py_compile app.py'
             }
         }
 
