@@ -15,7 +15,7 @@ pipeline {
 
         stage('2. Application Build & Test') {
             steps {
-                bat 'python -m py_compile app.py'
+                bat 'py -m py_compile app.py'
             }
         }
 
